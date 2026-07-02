@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:coffee_flutter/widgets/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:moyasar/moyasar.dart';
@@ -80,15 +82,13 @@ class _CoffeeShopState extends State<CoffeeShop> {
           if (result.source is CardPaymentResponseSource) {
             errorMessage = (result.source as CardPaymentResponseSource).message;
           } else if (result.source is ApplePayPaymentResponseSource) {
-            errorMessage =
-                (result.source as ApplePayPaymentResponseSource).message;
+            errorMessage = (result.source as ApplePayPaymentResponseSource).message;
           } else if (result.source is SamsungPayPaymentResponseSource) {
-            errorMessage =
-                (result.source as SamsungPayPaymentResponseSource).message;
+            errorMessage = (result.source as SamsungPayPaymentResponseSource).message;
           } else if (result.source is StcResponseSource) {
             errorMessage = (result.source as StcResponseSource).message;
           }
-          print(errorMessage ?? 'Payment failed');
+          log(errorMessage ?? 'Payment failed');
           break;
         case PaymentStatus.authorized:
           // handle authorized.

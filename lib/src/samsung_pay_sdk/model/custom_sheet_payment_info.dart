@@ -2,6 +2,7 @@ import 'package:moyasar/src/samsung_pay_sdk/model/payment_card_info.dart';
 import 'package:moyasar/src/samsung_pay_sdk/model/sheet_control.dart';
 import 'package:moyasar/src/samsung_pay_sdk/samsung_pay_listener.dart';
 import 'package:moyasar/src/samsung_pay_sdk/spay_core.dart';
+
 import 'address.dart';
 import 'address_control.dart';
 import 'amount_box_control.dart';
@@ -22,14 +23,9 @@ class CustomSheetPaymentInfo {
   bool? isRecurring;
   String? merchantCountryCode;
   CustomSheet customSheet;
-  Map<String,dynamic>? extraPaymentInfo;
+  Map<String, dynamic>? extraPaymentInfo;
 
-
-  CustomSheetPaymentInfo({
-    required this.merchantName,
-    required this.customSheet,
-    this.orderNumber
-  });
+  CustomSheetPaymentInfo({required this.merchantName, required this.customSheet, this.orderNumber});
 
   /// API to set the address display option for payment sheet.
   ///
@@ -38,7 +34,7 @@ class CustomSheetPaymentInfo {
   /// Return CustomSheetPaymentInfo Builder.
   ///
 
-  void setAddressInPaymentSheet(AddressInPaymentSheet addressInPaymentSheet){
+  void setAddressInPaymentSheet(AddressInPaymentSheet addressInPaymentSheet) {
     this.addressInPaymentSheet = addressInPaymentSheet;
   }
 
@@ -48,7 +44,7 @@ class CustomSheetPaymentInfo {
   /// [brands] Card brands supported by merchant for payment.
   ///
 
-  void setAllowedCardBrands(List<Brand> brands){
+  void setAllowedCardBrands(List<Brand> brands) {
     allowedCardBrand = brands;
   }
 
@@ -61,7 +57,7 @@ class CustomSheetPaymentInfo {
   /// [isCardHolderNameRequired] True, if merchant wants to display card holder's name on the payment sheet.
   ///
 
-  void setCardHolderNameEnabled(bool isCardHolderNameRequired){
+  void setCardHolderNameEnabled(bool isCardHolderNameRequired) {
     this.isCardHolderNameRequired = isCardHolderNameRequired;
   }
 
@@ -71,7 +67,7 @@ class CustomSheetPaymentInfo {
   /// [customSheet] CustomSheet configured by merchant.
   ///
 
-  void setCustomSheet(CustomSheet customSheet){
+  void setCustomSheet(CustomSheet customSheet) {
     this.customSheet = customSheet;
   }
 
@@ -81,7 +77,7 @@ class CustomSheetPaymentInfo {
   /// [extraPaymentInfo] Extra PaymentInfo data.
   ///
 
-  void setExtraPaymentInfo(Map<String,dynamic> extraPaymentInfo){
+  void setExtraPaymentInfo(Map<String, dynamic> extraPaymentInfo) {
     this.extraPaymentInfo = extraPaymentInfo;
   }
 
@@ -95,7 +91,7 @@ class CustomSheetPaymentInfo {
   /// Throws an [ArgumentError] if merchantCountryCode is invalid.<br>
   ///
 
-  void setMerchantCountryCode(String merchantCountryCode){
+  void setMerchantCountryCode(String merchantCountryCode) {
     this.merchantCountryCode = merchantCountryCode;
   }
 
@@ -107,7 +103,7 @@ class CustomSheetPaymentInfo {
   ///         then merchantId field can be set with a Payment Gateway User ID.<br>
   ///
 
-  void setMerchantId(String merchantId){
+  void setMerchantId(String merchantId) {
     this.merchantId = merchantId;
   }
 
@@ -117,7 +113,7 @@ class CustomSheetPaymentInfo {
   /// [merchantName] Merchant name.
   ///
 
-  void setMerchantName(String merchantName){
+  void setMerchantName(String merchantName) {
     this.merchantName = merchantName;
   }
 
@@ -128,7 +124,7 @@ class CustomSheetPaymentInfo {
   /// This field is mandatory for VISA.
   ///
 
-  void setOrderNumber(String orderNumber){
+  void setOrderNumber(String orderNumber) {
     this.orderNumber = orderNumber;
   }
 
@@ -141,7 +137,7 @@ class CustomSheetPaymentInfo {
   /// [cardBrand] Card brand.
   ///
 
-  void setPaymentCardBrand(Brand cardBrand){
+  void setPaymentCardBrand(Brand cardBrand) {
     _nullCheckExtraPaymentInfo();
     extraPaymentInfo![SpaySdk.EXTRA_CARD_BRAND] = cardBrand.name;
   }
@@ -154,7 +150,7 @@ class CustomSheetPaymentInfo {
   /// [last4digits] The last 4 digits of DPAN for payment transaction.
   ///
 
-  void setPaymentCardLast4DPAN(String last4digits){
+  void setPaymentCardLast4DPAN(String last4digits) {
     _nullCheckExtraPaymentInfo();
     extraPaymentInfo![SpaySdk.EXTRA_LAST4_DPAN] = last4digits;
   }
@@ -167,7 +163,7 @@ class CustomSheetPaymentInfo {
   /// [last4digits] The last 4 digits of FPAN for payment transaction.
   ///
 
-  void setPaymentCardLast4FPAN(String last4digits){
+  void setPaymentCardLast4FPAN(String last4digits) {
     _nullCheckExtraPaymentInfo();
     extraPaymentInfo![SpaySdk.EXTRA_LAST4_FPAN] = last4digits;
   }
@@ -178,7 +174,7 @@ class CustomSheetPaymentInfo {
   /// [shippingMethod] Shipping method.
   ///
 
-  void setPaymentShippingMethod(String shippingMethod){
+  void setPaymentShippingMethod(String shippingMethod) {
     _nullCheckExtraPaymentInfo();
     extraPaymentInfo![SpaySdk.EXTRA_SHIPPING_METHOD] = shippingMethod;
   }
@@ -189,15 +185,13 @@ class CustomSheetPaymentInfo {
   /// [isRecurring] True, if payment is recurring.
   ///
 
-  void setRecurringEnabled(bool isRecurring){
+  void setRecurringEnabled(bool isRecurring) {
     this.isRecurring = isRecurring;
   }
 
   ///@nodoc
-  void _nullCheckExtraPaymentInfo(){
-    if (extraPaymentInfo == null) {
-      extraPaymentInfo = {};
-    }
+  void _nullCheckExtraPaymentInfo() {
+    extraPaymentInfo ??= {};
   }
 
   /// API to return the country code, where merchant is operating.
@@ -245,7 +239,7 @@ class CustomSheetPaymentInfo {
   /// Return Card brand which was used in the current transaction.
   ///
 
-  Brand? getPaymentCardBrand(){
+  Brand? getPaymentCardBrand() {
     _nullCheckExtraPaymentInfo();
     return extraPaymentInfo![SpaySdk.EXTRA_CARD_BRAND];
   }
@@ -294,7 +288,7 @@ class CustomSheetPaymentInfo {
         return amountBoxControl.currencyCode;
       }
     }
-      return "";
+    return "";
   }
 
   /// API to return the shipping/delivery address which was used in the current transaction.<br>
@@ -315,7 +309,7 @@ class CustomSheetPaymentInfo {
         }
       }
     }
-      return null;
+    return null;
   }
 
   /// API to return the shipping method which was used in the current transaction.<br>
@@ -333,57 +327,64 @@ class CustomSheetPaymentInfo {
   }
 
   ///@nodoc
-  factory CustomSheetPaymentInfo.fromJson(Map<String, dynamic> json, SheetUpdatedListener? sheetUpdatedListener){
+  factory CustomSheetPaymentInfo.fromJson(
+      Map<String, dynamic> json, SheetUpdatedListener? sheetUpdatedListener) {
     CustomSheet customSheet = CustomSheet();
     customSheet = CustomSheet.fromJson(json["customSheet"], sheetUpdatedListener);
-    CustomSheetPaymentInfo customSheetPaymentInfo = CustomSheetPaymentInfo(merchantName: json["merchantName"].toString(), customSheet: customSheet);
+    CustomSheetPaymentInfo customSheetPaymentInfo = CustomSheetPaymentInfo(
+        merchantName: json["merchantName"].toString(), customSheet: customSheet);
     customSheetPaymentInfo.merchantId = json["merchantId"].toString();
     customSheetPaymentInfo.orderNumber = json["orderNumber"].toString();
-    if(json["addressInPaymentSheet"] == AddressInPaymentSheet.DO_NOT_SHOW.name) {
+    if (json["addressInPaymentSheet"] == AddressInPaymentSheet.DO_NOT_SHOW.name) {
       customSheetPaymentInfo.addressInPaymentSheet = AddressInPaymentSheet.DO_NOT_SHOW;
-    } else if(json["addressInPaymentSheet"] == AddressInPaymentSheet.NEED_BILLING_AND_SHIPPING.name)
-      customSheetPaymentInfo.addressInPaymentSheet = AddressInPaymentSheet.NEED_BILLING_AND_SHIPPING;
-    else if(json["addressInPaymentSheet"] == AddressInPaymentSheet.NEED_BILLING_SEND_SHIPPING.name)
-      customSheetPaymentInfo.addressInPaymentSheet == AddressInPaymentSheet.NEED_BILLING_SEND_SHIPPING;
-    else if(json["addressInPaymentSheet"] == AddressInPaymentSheet.NEED_BILLING_SPAY.name)
+    } else if (json["addressInPaymentSheet"] ==
+        AddressInPaymentSheet.NEED_BILLING_AND_SHIPPING.name) {
+      customSheetPaymentInfo.addressInPaymentSheet =
+          AddressInPaymentSheet.NEED_BILLING_AND_SHIPPING;
+    } else if (json["addressInPaymentSheet"] ==
+        AddressInPaymentSheet.NEED_BILLING_SEND_SHIPPING.name) {
+      customSheetPaymentInfo.addressInPaymentSheet ==
+          AddressInPaymentSheet.NEED_BILLING_SEND_SHIPPING;
+    } else if (json["addressInPaymentSheet"] == AddressInPaymentSheet.NEED_BILLING_SPAY.name) {
       customSheetPaymentInfo.addressInPaymentSheet == AddressInPaymentSheet.NEED_BILLING_SPAY;
-    else if(json["addressInPaymentSheet"] == AddressInPaymentSheet.NEED_SHIPPING_SPAY.name)
+    } else if (json["addressInPaymentSheet"] == AddressInPaymentSheet.NEED_SHIPPING_SPAY.name) {
       customSheetPaymentInfo.addressInPaymentSheet == AddressInPaymentSheet.NEED_SHIPPING_SPAY;
-    else if(json["addressInPaymentSheet"] == AddressInPaymentSheet.SEND_SHIPPING.name)
+    } else if (json["addressInPaymentSheet"] == AddressInPaymentSheet.SEND_SHIPPING.name) {
       customSheetPaymentInfo.addressInPaymentSheet == AddressInPaymentSheet.SEND_SHIPPING;
-
-    List<Brand> brandlist =[];
-    if(json["allowedCardBrand"] == null){
-      customSheetPaymentInfo.allowedCardBrand =  brandlist;
     }
-    else{
-      for(var brand in json["allowedCardBrand"]){
-        if(brand == Brand.VISA.name) {
+
+    List<Brand> brandlist = [];
+    if (json["allowedCardBrand"] == null) {
+      customSheetPaymentInfo.allowedCardBrand = brandlist;
+    } else {
+      for (var brand in json["allowedCardBrand"]) {
+        if (brand == Brand.VISA.name) {
           brandlist.add(Brand.VISA);
-        } else if(brand == Brand.MASTERCARD.name)
+        } else if (brand == Brand.MASTERCARD.name) {
           brandlist.add(Brand.MASTERCARD);
-        else if(brand == Brand.AMERICANEXPRESS.name)
+        } else if (brand == Brand.AMERICANEXPRESS.name) {
           brandlist.add(Brand.AMERICANEXPRESS);
-        else if(brand == Brand.CHINAUNIONPAY.name)
+        } else if (brand == Brand.CHINAUNIONPAY.name) {
           brandlist.add(Brand.CHINAUNIONPAY);
-        else if(brand == Brand.DISCOVER.name)
+        } else if (brand == Brand.DISCOVER.name) {
           brandlist.add(Brand.DISCOVER);
-        else if(brand == Brand.ECI.name)
+        } else if (brand == Brand.ECI.name) {
           brandlist.add(Brand.ECI);
-        else if(brand == Brand.PAGOBANCOMAT.name)
+        } else if (brand == Brand.PAGOBANCOMAT.name) {
           brandlist.add(Brand.PAGOBANCOMAT);
-        else if(brand == Brand.OCTOPUS.name)
+        } else if (brand == Brand.OCTOPUS.name) {
           brandlist.add(Brand.OCTOPUS);
-        else if(brand == Brand.MADA.name)
+        } else if (brand == Brand.MADA.name) {
           brandlist.add(Brand.MADA);
+        }
       }
-      customSheetPaymentInfo.allowedCardBrand =  brandlist;
+      customSheetPaymentInfo.allowedCardBrand = brandlist;
     }
     customSheetPaymentInfo.isCardHolderNameRequired = json["isCardHolderNameRequired"];
     customSheetPaymentInfo.isRecurring = json["isRecurring"];
     customSheetPaymentInfo.merchantCountryCode = json["merchantCountryCode"].toString();
     customSheetPaymentInfo.extraPaymentInfo = json["extraPaymentInfo"];
-    if(json["cardInfo"] != null) {
+    if (json["cardInfo"] != null) {
       customSheetPaymentInfo.cardInfo = PaymentCardInfo.fromJson(json["cardInfo"]);
     }
 
@@ -392,31 +393,32 @@ class CustomSheetPaymentInfo {
 
   ///@nodoc
   Map<String, dynamic> toJson() {
-    Map<String,dynamic> customSheetPaymentInfoJson={};
-    if(merchantId!= null) {
+    Map<String, dynamic> customSheetPaymentInfoJson = {};
+    if (merchantId != null) {
       customSheetPaymentInfoJson["merchantId"] = merchantId;
     }
     customSheetPaymentInfoJson["merchantName"] = merchantName;
-    if(orderNumber != null){
+    if (orderNumber != null) {
       customSheetPaymentInfoJson["orderNumber"] = orderNumber;
     }
-    if(addressInPaymentSheet?.name != null) {
+    if (addressInPaymentSheet?.name != null) {
       customSheetPaymentInfoJson["addressInPaymentSheet"] = addressInPaymentSheet?.name;
     }
-    if(allowedCardBrand != null){
-      customSheetPaymentInfoJson["allowedCardBrand"] = allowedCardBrand?.map((x) => x.name).toList();
+    if (allowedCardBrand != null) {
+      customSheetPaymentInfoJson["allowedCardBrand"] =
+          allowedCardBrand?.map((x) => x.name).toList();
     }
-    if(isCardHolderNameRequired!= null) {
+    if (isCardHolderNameRequired != null) {
       customSheetPaymentInfoJson["isCardHolderNameRequired"] = isCardHolderNameRequired;
     }
-    if(isRecurring != null) {
+    if (isRecurring != null) {
       customSheetPaymentInfoJson["isRecurring"] = isRecurring;
     }
-    if(merchantCountryCode!= null) {
+    if (merchantCountryCode != null) {
       customSheetPaymentInfoJson["merchantCountryCode"] = merchantCountryCode;
     }
     customSheetPaymentInfoJson["customSheet"] = customSheet.toJson();
-    if(extraPaymentInfo != null){
+    if (extraPaymentInfo != null) {
       customSheetPaymentInfoJson["extraPaymentInfo"] = extraPaymentInfo;
     }
     return customSheetPaymentInfoJson;
